@@ -1,0 +1,13 @@
+{% extends 'managertemplates/base.html' %}
+{% load static %}
+{% block title %}Advance Search form{% endblock title %}
+{% block content %}
+<form action="{% url 'manager_reject_form' %}">
+    <div class="form-group">
+      <label for="reson">Regect and Approve Reson</label>
+      <input type="text" class="form-control" id="reson">
+    </div>
+    <button type="submit" class="btn btn-default">Submit</button>
+  </form>
+  
+{% endblock content %}

@@ -1,0 +1,39 @@
+{% extends 'managertemplates/base.html' %}
+{% load static %}
+{% block title %}View Document{% endblock title %}
+{% block content %}
+
+{% include "managertemplates/alert_msg.html"%}
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <div class="clearfix">
+        <h4 class="card-title float-left"> 
+          <a href="{% url 'managerviewdocument' %}" class=" text-decoration-none"><i class="mdi mdi-arrow-left menu-icon"></i></a>
+           &nbsp;&nbsp;&nbsp;&nbsp;{{document.name}} Document</h4>
+        </div>
+
+        <div class="row mt-5">
+          <div class="col-lg-8">
+            <h4><b>Description:</b></h4>
+            <p class="">{{document.description}}</p>
+            <p><b>Document Type:</b>  {{document.file_type}}</span>
+            <p><b>Document Number:</b>  {{document.file_numble}}</p>
+            <p><b>Department:</b>  {{document.department}}</p>
+            {% if document.file %}
+            <a href="{{document.file.url}}" target="_blank" class="btn btn-primary btn-fw">View</a>
+            {% else %}
+            <p></p>
+            {% endif %}
+          </div>
+        
+          <div class="col-lg-4">
+            <img src="http://127.0.0.1:8000/{{document.qr_code}}" alt="{{document.qr_code}}" class="img-thumbnail">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock content %}

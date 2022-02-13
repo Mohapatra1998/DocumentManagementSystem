@@ -1,0 +1,105 @@
+{% extends 'managertemplates/base.html' %}
+{% load static %}
+{% block title %}Advance search{% endblock title %}
+{% block content %}
+
+<div class="row" id="active_row">
+    {% if document %}
+    <div class="col-sm-12">
+        <div class="card card-success">
+            <div class="card-header">
+                <h3 class="card-title">Document</h3>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table id="user_table" class="table table-hover table-bordered ">
+                        <thead>
+                        <tr>
+                            <th scope="col" style="width:6%">#</th>
+                            <th scope="col" style="width:8%">File Name</th>
+                            <th scope="col" style="width:28%">Description</th>
+                            <th scope="col" style="width:8%">Document</th>
+                            <th scope="col" style="width:10%">FileType</th>
+                            <th scope="col" style="width:8%">Department</th>
+                            <th scope="col" style="width:8%">FileNumber</th>
+                            <th scope="col" style="width:8%">Review</th>
+                            <th scope="col" style="width:8%">Status</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for d in document %}
+                        <tr>
+                            <td>{{forloop.counter}}</td>
+                            <td>{{d.name}}</td>
+                            <td class="panel-heading">{{d.description}}</td>
+                            <td>{{d.file_type}}</td>
+                            <td>{{d.department}}</td>
+                            <td>{{d.file_numble}}</td>
+                            <td>{{d.review}}</td>
+                            {% if d.file %}
+                            <td>
+                                <a href="{{d.file.url}}" class="btn btn-dark border btn-lg" style="width:100%">View</a>
+                            </td>
+                            {% else %}
+                           <td></td>
+                            {% endif %}
+
+                            <td>{% if d.aproved_by_manager == '1' %}
+                                <button class="btn btn-success">Approved</button>
+                                {% elif d.aproved_by_manager == '2' %}
+                                <button class="btn btn-danger">Rejected</button>
+
+                                {% else %}
+                                <button class="btn btn-warning" data-target="#approve_modal{{d.id}}"
+                                        data-toggle="modal">Pending
+                                </button>
+                                {% endif %}
+                                <div class="modal" id="approve_modal{{d.id}}">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLongTitle">Approve Document</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+
+                                            <div class="modal-body ">
+                                                <form action="{% url 'approvestatus' %}" method="post">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="document_id" value="{{d.id}}">
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="approve" value="1">Approve
+                                                    </label>
+                                                    <label class="radio-inline">
+                                                        <input type="radio" name="approve" value="2">Reject
+                                                    </label>
+                                                    <center>
+                                                        <button class="btn btn-success">Submit</button>
+                                                    </center>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </td>
+                        </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class=" container alert alert-danger my-3 san" style="color:white">
+    <h2>No Search Result</h2>
+    <p>Your search query: - did not match any documents</p>
+    <p>Suggestions: Try different Keywords</p>
+  </div>
+  {% endif %}
+</div>
+{% endblock content %}

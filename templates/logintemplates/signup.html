@@ -1,0 +1,47 @@
+{% extends 'logintemplates/base.html' %}
+{% load static %}
+{% block title %}SignUp{% endblock title %}
+{% block content %}
+<div class="container">
+    <!-- alert messgae on success and error -->
+    <div class="row" id="msg_alert">
+        {% if messages %}
+      <div class="col-12">
+          {% for message in messages %}
+          {% if message.tags == 'error' %}
+          <div class="alert alert-danger background-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <i class="fas fa-times-circle text-white"></i>
+            </button>
+            <span class="text-center">{{ message }}</span>
+            </div>
+          {% elif message.tags == 'success' %}
+          <div class="alert alert-success background-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <i class="fas fa-times-circle text-white"></i>
+            </button>
+            <span class="text-center">{{ message }}</span>
+            </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+<!-- alert messgae on success and error -->
+
+<div class='form' style="max-width:500px">
+<form class='login-form' method='POST' action="{% url 'signup' %}">
+{% csrf_token %}
+<h3>SignUp Form</h3>
+<input type='text' id='fname' name='first_name' placeholder='First Name' pattern="[A-Za-z]" required class="login-page">
+<input type='text' name='last_name' id='lname' placeholder='Last Name' pattern="[A-Za-z]" required>
+<input type='email' name='email' id='email' placeholder='Email Address' aria-describedby="emailHelp" required>
+<input type="tel" id="mobile" name="mobile" placeholder="Phone Number" required pattern="[0-9]{10}">
+<input type='password' name='password1' id='pwd' placeholder='Password' required>
+<input type='password' name='password2' id='pwd1' placeholder='Conform Password' required>
+<button type="submit" class="btn btn-primary">SignUp</button><hr>
+    <p class="message">Already have an account? <h3><a href="{% url 'login' %}">Login</a></h3> </p>
+</form>
+</div>
+</div>
+{% endblock content %}

@@ -1,0 +1,9 @@
+{% extends 'managertemplates/base.html' %}
+{% load static %}
+{% block title %}View Document{% endblock title %}
+{% block content %}
+<div class="ui-container">
+    {% for d in document %}
+    <h2>{{d.file.url}}</h2>
+    <img src="{{d.qr_code.url}}">
+</div>

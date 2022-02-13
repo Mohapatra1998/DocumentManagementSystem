@@ -1,0 +1,35 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    {% url 'managerdashboard' as managerdashboard %}
+    <li class="nav-item {% if request.path == managerdashboard %}active{%endif%}">
+      <a class="nav-link" href="{{managerdashboard}}">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+    {% url 'ad_search_form' as ad_search_form %}
+    <li class="nav-item {% if request.path == ad_search_form %}active{%endif%}">
+      <a class="nav-link" href="{{ad_search_form}}">
+        <span class="menu-title">Advance Search</span>
+        <i class="mdi mdi-account-search menu-icon"></i>
+      </a>
+    </li>
+
+    {% url 'managerviewdocument' as managerviewdocument%}
+    <li class="nav-item {% if request.path == managerviewdocument %}active{%endif%}">
+      <a class="nav-link" href="{{managerviewdocument}}">
+        <span class="menu-title">View Documents</span>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="{% url 'managerlogout' %}">
+        <span class="menu-title">Logout</span>
+        <i class="mdi mdi-logout menu-icon"></i>
+      </a>
+    </li>
+
+
+ 
+  </ul>
+</nav>

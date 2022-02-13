@@ -1,0 +1,32 @@
+<!-- alert messgae on success and error -->
+<div class="row" id="msg_alert">
+    {% if messages %}
+  <div class="col-12">
+      {% for message in messages %}
+      {% if message.tags == 'error' %}
+      <div class="alert alert-danger background-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="text-center">{{ message }}</span>
+        </div>
+      {% elif message.tags == 'success' %}
+      <div class="alert alert-success background-success">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="text-center">{{ message }}</span>
+        </div>
+      {% elif message.tags == 'warning' %}
+      <div class="alert alert-warning background-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+        <span aria-hidden="true">&times;</span>
+        </button>
+        <span class="text-center">{{ message }}</span>
+        </div>
+      {% endif %}
+      {% endfor %}
+    </div>
+    {% endif %}
+  </div>
+<!-- alert messgae on success and error -->

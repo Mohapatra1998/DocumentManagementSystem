@@ -1,0 +1,42 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    {% url 'userdashboard' as userdashboard %}
+    <li class="nav-item {% if request.path == userdashboard %}active{%endif%}">
+      <a class="nav-link" href="{{userdashboard}}">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+    {% url 'uploaddocument' as uploaddocument %}
+    <li class="nav-item {% if request.path == uploaddocument %}active{%endif%}">
+      <a class="nav-link" href="{{uploaddocument}}">
+        <span class="menu-title">Upload Document</span>
+        <i class="mdi mdi-note-plus menu-icon"></i>
+      </a>
+    </li>
+    {% url 'ad_search_form2' as ad_search_form2 %}
+    <li class="nav-item {% if request.path == ad_search_form2 %}active{%endif%}">
+      <a class="nav-link" href="{{ad_search_form2}}">
+        <span class="menu-title">Advance Search</span>
+        <i class="mdi mdi-account-search menu-icon"></i>
+      </a>
+    </li>
+
+    {% url 'viewdocument' as viewdocument%}
+    <li class="nav-item {% if request.path == viewdocument %}active{%endif%}">
+      <a class="nav-link" href="{{viewdocument}}">
+        <span class="menu-title">View Documents</span>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="{% url 'userlogout' %}">
+        <span class="menu-title">Logout</span>
+        <i class="mdi mdi-logout menu-icon"></i>
+      </a>
+    </li>
+
+
+ 
+  </ul>
+</nav>

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">AdminDashboord</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item active">
+        <a class="nav-link" href="#">Home</span></a>
+      </li>
+        <li class="nav-item">
+        <a class="nav-link" href="{% url 'admindashboard' %}">Admin Dashboard</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'viewuser' %}">View User</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'viewmanager' %}">View Manager</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'adminviewdocument' %}">Document</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'ad_search_form1' %}">Document</a>
+      </li>
+       <li class="nav-item">
+        <a class="nav-link" href="{% url 'adminlogout' %}">Logout</a>
+
+    </ul>
+   <form method="get" action="{% url 'searchadmin' %}" class="form-inline my-2 my-lg-0">
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search" name="query" id="tags">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </form>
+  </div>
+</nav>

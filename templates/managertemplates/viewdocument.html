@@ -1,0 +1,135 @@
+{% extends 'managertemplates/base.html' %}
+{% load static %}
+{% block title %}View Document{% endblock title %}
+{% block content %}
+{% include "managertemplates/alert_msg.html"%}
+{% if document %}
+<div class="row">
+  <div class="col-lg-12 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h4 class="card-title float-left">All Documents</h4>
+          <form action="{% url 'searchmanager' %}" method="GET">
+            <div class="form-group row float-right">
+              <div class="col-sm-12">
+                <input type="search" class="form-control" id="tags" name="query" placeholder="Search ...">
+              </div>
+            </div>
+          </form>
+        <table class="table table-hover table-bordered">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>File Name</th>
+              <th>FileType</th>
+              <td>Department</td>
+              <th>FileNumber</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            {%  for d in document %}
+            <tr>
+                <td>{{forloop.counter}}</td>
+                <td><a href="{% url 'admin_document_details' id=d.id %}">{{d.name}}</a></td>
+                <td>{{d.file_type}}</td>
+                <td>{{d.department}}</td>
+                <td>{{d.file_numble}}</td>
+                <!-- <td> <img src="http://127.0.0.1:8000/{{d.qr_code}}" alt="{{d.qr_code}}" width="150px" height="150px"></td> -->
+                
+                <td>{% if d.aproved_by_manager == '1' %}
+                  <button class="btn btn-success">Approved</button>
+                  
+
+                  {% elif d.aproved_by_manager == '2' %}
+                  <button class="btn btn-danger">Rejected</button>
+
+                  {% else %}
+                  <button class="btn btn-warning" data-target="#approve_modal{{d.id}}"
+                  data-toggle="modal">Pending</button>
+                  {% endif %}
+                  <div class="modal" id="approve_modal{{d.id}}">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Approve Document</h5>
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+
+                            <div class="modal-body ">
+                                <form action="{% url 'approvestatus1' %}" method="post">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="document_id" value="{{d.id}}">
+                                    <div class="form-group row">
+                                      <label class="col-sm-4 col-form-label">Approve / Reject</label>
+                                      <div class="col-sm-4">
+                                        <div class="form-check">
+                                          <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="approve" id="membershipRadios1" value="1"> Approve</label>
+                                        </div>
+                                      </div>
+                                      <div class="col-sm-4">
+                                        <div class="form-check">
+                                          <label class="form-check-label">
+                                            <input type="radio" class="form-check-input" name="approve" id="membershipRadios2" value="2"> Reject</label>
+                                        </div>
+                                      </div>
+                                      
+                                    </div>
+
+                                    <div class="form-group d-none" id="reject_div">
+                                      <label for="">Reject Reason</label>
+                                      <textarea name="reject_reason" id="" cols="30" rows="5" class="form-control"></textarea>
+                                    </div>
+                            
+                                    <center>
+                                        <button class="btn btn-success">Submit</button>
+                                    </center>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+ 
+</div>
+{% else %}
+
+</form>
+<div class=" container alert alert-danger" style="color:black">
+  <h2>No Search Result</h2>
+  <p>Your search query: <b>{{query}}</b> - did not match any documents</p>
+  <p>Suggestions: Try different Keywords</p>
+</div>
+{% endif %}
+{% endblock content %}
+
+{% block javascript %} 
+
+<script>
+    $('input[type="radio"]').click(function(){
+
+        if($(this).attr("value")== "2"){
+            $("#reject_div").removeClass('d-none')
+            $("#reject_div").addClass('d-block')
+          
+         
+           // document.getElementById("reject_div").style("display","block");
+        }
+
+        if($(this).attr("value")=="1"){
+          //document.getElementById("reject_div").style("display","none");
+          $("#reject_div").removeClass('d-block')
+          $("#reject_div").addClass('d-none')
+
+        }
+    })
+</script>
+{% endblock javascript %}

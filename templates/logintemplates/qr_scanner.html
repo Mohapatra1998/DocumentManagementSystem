@@ -1,0 +1,109 @@
+{% extends 'logintemplates/base.html' %}
+{% load static %}
+{% block title %}Drawning Number{% endblock title %}
+{% block content %}
+
+
+<div class="container-scroller">
+    <div class="container-fluid page-body-wrapper full-page-wrapper">
+      <div class="content-wrapper d-flex align-items-center auth">
+        <div class="row flex-grow">
+          <div class="col-lg-4 mx-auto">
+            <div class="auth-form-light text-left p-5">
+                <a href="{% url 'login' %}" class="text-primary"><i class="mdi mdi-arrow-left"></i></a>
+                <h5 class="text-center">File Number <strong class="text-primary pl-2">{{drwn_no}}</strong></h5>
+                <center><button  class="btn btn-primary mt-3" data-toggle="modal" data-target="#do_login" >View more</button></center>
+                <div class="modal" id="do_login">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header mx-3">
+                                <h5 class="modal-title" id="exampleModalLongTitle">Login</h5>
+                                <button type="button" class="close" data-dismiss="modal"
+                                        aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+        
+                            <div class="modal-body">
+                                <div class="px-5" id="login_form">
+                                    <input type="hidden" id="document_id"  value="{{doc_id}}">
+                                    <div class="form-group">
+                                        <input type="email" class="form-control form-control-lg" id="email" name='email' placeholder="example@ gmail.com" aria-describedby="emailHelp" required autocomplete="off">
+                                      </div>
+                                      <div class="form-group">
+                                        <input type="password" class="form-control form-control-lg" id="pwd" name='password' placeholder="Password" required autocomplete="off">
+                                      </div>
+                                      
+                                    <center>
+                                        <button class="btn btn-success mt-3" id="login">Login</button>
+                                    </center>
+                                </div>
+                            </div>
+              </form>
+            </div>
+          </div>
+                </div>
+            </div>
+      <!-- content-wrapper ends -->
+        </div>
+        </div>
+    </div>
+    </div>
+  </div>
+
+{% endblock content %}
+
+{% block javascript %}
+    <script>
+      $("#login").click(function(){
+        var document_id = $('#document_id').val();
+        var email = $('#email').val();
+        var pwd = $('#pwd').val();
+        $.ajax({
+            url: "{% url 'scanner_login' %}",
+            type: "POST",
+            data: {
+            "email": email,"password":pwd,"doc_id":document_id
+            },
+            cache: false,
+            success: function(result){
+            console.log("login success",result)
+            if(result['message'] == "alogin"){
+                
+            var url_doc =`{% url 'admin_document_details' id=123 %}` ;
+            var url= url_doc.replace('123', result['doc_id']);
+            window.location.href=url;
+                }
+
+            if(result['message'] == "mlogin"){
+            
+            var url_doc =`{% url 'manager_document_details' id=123 %}` ;
+            var url= url_doc.replace('123', result['doc_id']);
+            window.location.href=url;
+                }
+
+
+            if(result['message'] == "ulogin"){
+            
+            var url_doc =`{% url 'document_details' id=123 %}` ;
+            var url= url_doc.replace('123', result['doc_id']);
+            window.location.href=url;
+                }
+
+            if(result['message'] == "invalid_credintial"){
+                $('<div class="alert alert-danger background-danger"><button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button><span class="text-center">Invalid Email , Password</span></div>').insertBefore('#login_form')
+
+                $('#pwd').val("");
+
+                }
+
+            },
+            error: function(result){
+            console.log(result)
+            }
+        });                 
+
+      }); 
+        
+    </script>       
+{% endblock javascript %}

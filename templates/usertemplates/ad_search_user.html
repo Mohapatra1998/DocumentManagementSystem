@@ -1,0 +1,104 @@
+{% extends 'usertemplates/base.html' %}
+{% load static %}
+{% block title %}View Document{% endblock title %}
+{% block content %}
+
+<!-- alert messgae on success and error -->
+    <div class="row" id="msg_alert">
+        {% if messages %}
+      <div class="col-12">
+          {% for message in messages %}
+          {% if message.tags == 'error' %}
+          <div class="alert alert-danger background-danger">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+            <span class="text-center">{{ message }}</span>
+            </div>
+          {% elif message.tags == 'success' %}
+          <div class="alert alert-success background-success">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+            </button>
+            <span class="text-center">{{ message }}</span>
+            </div>
+          {% endif %}
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+<!-- alert messgae on success and error -->
+{% if document %}
+<div class="row" id="active_row">
+  <div class="col-sm-12">
+    <a href="{% url 'uploaddocument' %}" class="btn btn-success float-right ">Upload Document</a>
+    <div class="card card-success mt-5 mb-5">
+      <div class="card-header">
+        <h3 class="card-title">Document</h3>
+      </div>
+      <div class="card-body">
+        <div class="table-responsive">
+          <table id="user_table" class="table table-hover table-bordered ">
+          <thead>
+          <tr>
+          <th scope="col" style="width:6%">#</th>
+          <th scope="col" style="width:8%">File Name</th>
+              <th scope="col" style="width:28%">Description</th>
+              <th scope="col" style="width:8%">Document</th>
+              <th scope="col" style="width:8%">FileType</th>
+              <th scope="col" style="width:8%">Department</th>
+              <th scope="col" style="width:8%">FileNumber</th>
+              <th scope="col" style="width:8%">Review</th>
+              <th scope="col" style="width:8%">Status</th>
+              <th scope="col" style="width:8%">Action</th>
+          </tr>
+          </thead>
+          <tbody>
+              {%  for d in document %}
+              <tr>
+                  <td>{{forloop.counter}}</td>
+                  <td>{{d.name}}</td>
+                  <td>{{d.description}}</td>
+                  {% if d.file %}
+                  <td>
+                      <a href="{{d.file.url}}" class="btn btn-dark border btn-lg" style="width:100%">View</a>
+                  </td>
+                  {% else %}
+                  <td></td>
+                  {% endif %}
+                  <td>{{d.file_type}}</td>
+                  <td>{{d.department}}</td>
+                  <td>{{d.file_numble}}</td>
+                  <td>{{d.review}}</td>
+                  <td>{% if d.aproved_by_admin == '1' %}
+                      <button class="btn btn-success">Approved</button>
+                  {% elif d.aproved_by_admin == '2' %}
+                    <button class="btn btn-danger">Rejected</button>
+
+                  {% else %}
+                      <button class="btn btn-warning">Pending</button>
+                  {% endif %}
+                  </td>
+                  <td>
+                  {% if d.aproved_by_admin != '1' %}
+                      <a href="{% url 'updatedocument' id=d.id %}">Update</a>
+                    {% endif %}
+                  </td>
+
+              </tr>
+              {% endfor %}
+          </tbody>
+          </table>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+{% else %}
+<div class=" container alert alert-danger my-3 san" style="color:white">
+    <h2>No Search Result</h2>
+    <p>Your search query: <b>{{query}}</b> - did not match any documents</p>
+    <p>Suggestions: Try different Keywords</p>
+  </div>
+  {% endif %}
+{% endblock content %}

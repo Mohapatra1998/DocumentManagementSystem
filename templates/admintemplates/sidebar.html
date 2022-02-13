@@ -1,0 +1,65 @@
+<nav class="sidebar sidebar-offcanvas" id="sidebar">
+  <ul class="nav">
+    {% url 'admindashboard' as admindashboard %}
+    <li class="nav-item {% if request.path == admindashboard %}active{%endif%}">
+      <a class="nav-link" href="{{admindashboard}}">
+        <span class="menu-title">Dashboard</span>
+        <i class="mdi mdi-home menu-icon"></i>
+      </a>
+    </li>
+    {% url 'ad_search_form1' as ad_search_form1 %}
+    <li class="nav-item {% if request.path == ad_search_form1 %}active{%endif%}">
+      <a class="nav-link" href="{{ad_search_form1}}">
+        <span class="menu-title">Advance Search</span>
+        <i class="mdi mdi-account-search menu-icon"></i>
+      </a>
+    </li>
+    {% url 'addmanager' as addmanager %}
+    <li class="nav-item {% if request.path == addmanager %}active{%endif%}">
+      <a class="nav-link" href="{{addmanager}}">
+        <span class="menu-title">Add Manager</span>
+        <i class="mdi mdi-note-plus menu-icon"></i>
+      </a>
+    </li>
+    {% url 'adduser' as adduser %}
+    <li class="nav-item {% if request.path == adduser %}active{%endif%}">
+      <a class="nav-link" href="{{adduser}}">
+        <span class="menu-title">Add User</span>
+        <i class="mdi mdi-note-plus menu-icon"></i>
+      </a>
+    </li>
+
+
+
+    {% url 'adminviewdocument' as adminviewdocument%}
+    <li class="nav-item {% if request.path == viewdocument %}active{%endif%}">
+      <a class="nav-link" href="{{adminviewdocument}}">
+        <span class="menu-title">View Documents</span>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    {% url 'viewmanager' as viewmanager%}
+    <li class="nav-item {% if request.path == viewmanager %}active{%endif%}">
+      <a class="nav-link" href="{{viewmanager}}">
+        <span class="menu-title">View Manager</span>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    {% url 'viewuser' as viewuser%}
+    <li class="nav-item {% if request.path == viewuser %}active{%endif%}">
+      <a class="nav-link" href="{{viewuser}}">
+        <span class="menu-title">View User</span>
+        <i class="mdi mdi-view-dashboard menu-icon"></i>
+      </a>
+    </li>
+    <li class="nav-item ">
+      <a class="nav-link" href="{% url 'adminlogout' %}">
+        <span class="menu-title">Logout</span>
+        <i class="mdi mdi-logout menu-icon"></i>
+      </a>
+    </li>
+
+
+ 
+  </ul>
+</nav>

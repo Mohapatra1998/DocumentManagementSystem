@@ -1,0 +1,101 @@
+{% extends 'usertemplates/base.html' %}
+{% load static %}
+{% block title %}Document Uploader{% endblock title %}
+{% block content %}
+<!-- alert messgae on success and error -->
+{% include 'usertemplates/alert_msg.html'%}
+<!-- alert messgae on success and error -->
+<div class="row">
+  <div class="col-md-2 grid-margin stretch-card"></div>
+
+  <div class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title text-center text-primary pb-3">Upload Document</h3>
+        <form class='login-form' method='POST' action="{% url 'uploaddocument' %}" enctype="multipart/form-data" >
+        {% csrf_token %}
+
+        <div class="form-group row">
+          <label for="filename" class="col-sm-3 col-form-label">File Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="filename" name="name" placeholder="Enter File Name">
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="desname" class="col-sm-3 col-form-label">Description</label>
+          <div class="col-sm-9">
+            <textarea class="form-control" id="desname" name="description" rows="5" required placeholder="Description"></textarea>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="file_numble" class="col-sm-3 col-form-label">File Number</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="file_numble" name="file_numble" placeholder="File number">
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="review" class="col-sm-3 col-form-label">Review</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="review" name="review" placeholder="Reviews">
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="dp" class="col-sm-3 col-form-label">Departmant</label>
+          <div class="col-sm-9">
+            <select name="department" class="form-control" id="dp">
+              <option selected disabled>Select Department</option>
+              <option value="Civil">Civil</option>
+              <option value="Mechanical">Mechanical</option>
+              <option value="Computer">Computer</option>
+              <option value="BCA">BCA</option>
+          </select>  
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label class="col-sm-3 col-form-label">Document Type</label>
+          <div class="col-sm-3">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="file_type" id="membershipRadios1" value="DOC" checked> DOC</label>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="file_type" id="membershipRadios2" value="PDF"> PDF</label>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input type="radio" class="form-check-input" name="file_type" id="membershipRadios2" value="EXE"> EXE</label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="fil" class="col-sm-3 col-form-label">Upload File</label>
+          <div class="col-sm-9">
+            <input type="file" class="form-control" id="file" name="file">
+          </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Upload</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- col-8 end -->
+
+  <div class="col-md-2 grid-margin stretch-card"></div>
+
+</div>
+
+{% endblock content %}

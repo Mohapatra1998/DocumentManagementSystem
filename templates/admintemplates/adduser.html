@@ -1,0 +1,104 @@
+{% extends 'admintemplates/base.html' %}
+{% load static %}
+{% block title %}AddUser{% endblock title %}
+{% block content %}
+<div class="row">
+  <div class="col-md-2 grid-margin stretch-card"></div>
+
+  <div class="col-md-8 grid-margin stretch-card">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title text-center text-primary pb-3">Add User</h3>
+        <form class='login-form' method='POST' action="{% url 'adduser' %}"  >
+        {% csrf_token %}
+
+        <div class="form-group row">
+          <label for="firstname" class="col-sm-3 col-form-label">First Name</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="firstname" name="first_name" placeholder="First Name" required>
+          </div>
+        </div>
+
+       
+        <div class="form-group row">
+          <label for="lastname" class="col-sm-3 col-form-label">Last Name:</label>
+          <div class="col-sm-9">
+            <input type="text" class="form-control" id="lastname" name="last_name" placeholder="Last Name" required>
+          </div>
+        </div>
+
+
+        <div class="form-group row">
+          <label for="email" class="col-sm-3 col-form-label">Email Address:</label>
+          <div class="col-sm-9">
+            <input type="email" class="form-control" id="email" name="email" placeholder="example@gmail.com" aria-describedby="emailHelp" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="phn" class="col-sm-3 col-form-label">Mobile Number:</label>
+          <div class="col-sm-9">
+            <input type="number" class="form-control" id="phn" name="mobile" placeholder="Mobile Number" required>
+          </div>
+        </div>
+
+        <div class="form-group row">
+          <label for="pwd" class="col-sm-3 col-form-label">Password:</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" id="pwd" name="password1" placeholder="******" required>
+          </div>
+        </div>
+        <div class="form-group row">
+          <label for="pwd1" class="col-sm-3 col-form-label">Conform Password:</label>
+          <div class="col-sm-9">
+            <input type="password" class="form-control" id="pwd1" name="password2" placeholder="******" required>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">AddUser</button>
+        </form>
+      </div>
+    </div>
+  </div>
+  <!-- col-8 end -->
+
+  <div class="col-md-2 grid-margin stretch-card"></div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class='form' style="max-width:500px">
+<form class='login-form' method='POST' action="{% url 'adduser' %}">
+{% csrf_token %}
+<h3>AddUser Form</h3>
+<input type='text' id='fname' name='first_name' placeholder='First Name' required class="login-page">
+<input type='text' name='last_name' id='lname' placeholder='Last Name' required>
+<input type='email' name='email' id='email' placeholder='Email Address' aria-describedby="emailHelp" required>
+<input type="tel" id="mobile" name="mobile" placeholder="Phone Number" required pattern="[0-9]{10}">
+<input type='password' name='password1' id='pwd' placeholder='Password' required>
+<input type='password' name='password2' id='pwd1' placeholder='Conform Password' required>
+<button type="submit" class="btn btn-primary">SignUp</button>
+</form>
+</div>
+</div> -->
+{% endblock content %}

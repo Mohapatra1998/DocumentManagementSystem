@@ -1,0 +1,77 @@
+*{
+    padding:0;
+    margin:0;
+    box-sizing:border-box;
+}
+body{
+    background-color:slateblue;
+    height: 100vh;
+    background-size:cover;
+    background-position: center;
+
+}
+.login-page{
+    width: 400px;
+    padding:15px;
+    margin:auto;    
+}
+.form{
+    position: relative;
+    z-index: 1;
+    background: #FF8E15;
+    max-width: 360px;
+    margin: 0 auto 100px;
+    padding: 45px;
+
+
+}
+.form input, textarea{
+    font-family:"Roboto", sans-serif;
+    outline:1;
+    background:#f2f2f2;
+    width:100%;
+    border:0;
+    margin:0 0 15px;
+    padding:15px;
+    box-size:14px,
+    text-align:center;
+}
+.form label{
+    font-size:3ev;
+}
+.form button{
+    font-family:"Roboto", sans-serif;
+    text-transform:uppercase;
+    outline:0;
+    background:#4CAF50;
+    width:100%;
+    border:0;
+    padding:15px;
+    color:#FFFFFF;
+    font-size:14px;
+    cursor:pointer;
+}
+.form .message{
+    margin:10px;
+    color:aliceblue;
+    font-size:1.5ev`;
+}
+.form .message a{
+    color:#4CAF50;
+    text-decoration:none;
+}
+.form h3{
+    padding-bottom:3%;
+
+}
+select{
+   font-family:"Roboto", sans-serif;
+    outline:1;
+    background:#f2f2f2;
+    width:100%;
+    border:0;
+    margin:0 0 15px;
+    padding:15px;
+    box-size:14px,
+    text-align:center;
+}
